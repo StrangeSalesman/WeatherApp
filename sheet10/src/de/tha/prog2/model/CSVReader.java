@@ -10,32 +10,32 @@ import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 public class CSVReader implements ICSVReader {
-	public static void main(String[] args) {
-		try {
-			InputStream in = new FileInputStream("stations.txt");
-			CSVReader reader = new CSVReader();
-			List<IWeatherStation> list = reader.readWeatherStations(in);
-			in.close();
-			
+//	public static void main(String[] args) {
+//		try {
+//			InputStream in = new FileInputStream("resources/stations.txt");
+//			CSVReader reader = new CSVReader();
+//			List<IWeatherStation> list = reader.readWeatherStations(in);
+//			in.close();
+//			
 //			for (IWeatherStation iWeatherStation : list) {
 //				System.out.println(iWeatherStation.toString());
 //			}
 			
-			InputStream in2 = new FileInputStream("wetterdaten-klein.gz");
-			List<IWeatherEntry> list2 = reader.readWeatherEntries(in2);
-			in2.close();
-
-			
+//			InputStream in2 = new FileInputStream("resources/wetterdaten-klein.gz");
+//			List<IWeatherEntry> list2 = reader.readWeatherEntries(in2);
+//			in2.close();
+//
+//			
 //			for (IWeatherEntry iWeatherEntry : list2) {
 //				System.out.println(iWeatherEntry.toString());
 //			}
 
 			
 			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Override
 	public List<IWeatherEntry> readWeatherEntries(InputStream in) throws IOException {

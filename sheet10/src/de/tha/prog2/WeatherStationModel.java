@@ -1,44 +1,101 @@
 package de.tha.prog2;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
+
+import de.tha.prog2.model.*;
 
 public class WeatherStationModel {
+    
+	public List<IWeatherEntry> readWeatherEntries(InputStream in) throws IOException {
+		InputStream gin = new GZIPInputStream(in);
+		List<IWeatherEntry> list = new ArrayList<>();
+		InputStreamReader isr = new InputStreamReader(gin);
+		BufferedReader reader = new BufferedReader(isr);
 
-    public List<DemoWeatherEntry> getDemoData() {
-        List<DemoWeatherEntry> data = new ArrayList<>();
+		// skip first line
+		String line = reader.readLine();
 
-        data.add(new DemoWeatherEntry("20240101", 6.2, -1.0));
-        data.add(new DemoWeatherEntry("20240102", 7.5, 0.5));
-        data.add(new DemoWeatherEntry("20240103", 5.1, -2.2));
-        data.add(new DemoWeatherEntry("20240104", 8.0, 1.3));
-        data.add(new DemoWeatherEntry("20240105", 4.8, -3.0));
+		
+		while ((line = reader.readLine()) != null) {
+			
+			String[] fields = line.split(";");
 
-        return data;
-    }
+			WeatherEntry ws = new WeatherEntry();
+			ws.setStationID(Integer.parseInt(fields[0]));
+			ws.setDate(fields[1]);
+			ws.setRain((int) Math.round(Double.parseDouble(fields[2])));
+			ws.setDailyMaxTemp((int) Math.round(Double.parseDouble(fields[3])));
+			ws.setDailyMinTemp((int) Math.round(Double.parseDouble(fields[4])));
 
-    public static class DemoWeatherEntry {
 
-        private final String date;
-        private final double maxTemperature;
-        private final double minTemperature;
+			list.add(ws);
+		}
 
-        public DemoWeatherEntry(String date, double maxTemperature, double minTemperature) {
-            this.date = date;
-            this.maxTemperature = maxTemperature;
-            this.minTemperature = minTemperature;
-        }
+		return list;
+	}
 
-        public String getDate() {
-            return date;
-        }
+	
+	public List<IWeatherStation> readWeatherStations(InputStream in) throws IOException {
+			List<IWeatherStation> list = new ArrayList<>();
+			InputStreamReader isr = new InputStreamReader(in);
+			BufferedReader reader = new BufferedReader(isr);
 
-        public double getMaxTemperature() {
-            return maxTemperature;
-        }
+			// skip first line
+			String line = reader.readLine();
 
-        public double getMinTemperature() {
-            return minTemperature;
-        }
-    }
+			
+			while ((line = reader.readLine()) != null) {
+				
+				String[] fields = line.split(";");
+
+				WeatherStation ws = new WeatherStation();
+				ws.setStationID(Integer.parseInt(fields[0]));
+				ws.setCity(fields[1]);
+				ws.setState(fields[2]);
+
+				list.add(ws);
+			}
+
+			return list;
+		}
+	
+	public List<IWeatherEntry> readWeatherEntriesForStation(InputStream in, int stationID, int max) throws IOException {
+		if (in == null) return new ArrayList<>();
+		
+		InputStream gin = new GZIPInputStream(in);
+		List<IWeatherEntry> list = new ArrayList<>();
+		InputStreamReader isr = new InputStreamReader(gin);
+		BufferedReader reader = new BufferedReader(isr);
+
+		// skip first line
+		String line = reader.readLine();
+
+		int count = 0;
+		while ((line = reader.readLine()) != null && count != max) {
+			
+			String[] fields = line.split(";");
+
+			WeatherEntry ws = new WeatherEntry();
+			if(Integer.parseInt(fields[0]) == stationID) {
+				ws.setStationID(Integer.parseInt(fields[0]));
+				ws.setDate(fields[1]);
+				ws.setRain((int) Math.round(Double.parseDouble(fields[2])));
+				ws.setDailyMaxTemp((int) Math.round(Double.parseDouble(fields[3])));
+				ws.setDailyMinTemp((int) Math.round(Double.parseDouble(fields[4])));
+				count++;
+				list.add(ws);
+
+			}
+			
+		}
+
+		return list;
+	} 
+
 }
