@@ -60,7 +60,7 @@
             <Label prefHeight="17.0" prefWidth="118.0" text="Maximaltemperatur" GridPane.rowIndex="2" />
             <Label prefHeight="17.0" prefWidth="118.0" text="Minimaltemperatur" GridPane.rowIndex="3" />
             <Label prefHeight="17.0" prefWidth="118.0" text="Niederschlag" GridPane.rowIndex="4" />
-            <CheckBox fx:id="maxTemp" mnemonicParsing="false" onAction="#checkMaxTemp" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckBox fx:id="maxTemp" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <CheckBox fx:id="minTemp" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <CheckBox fx:id="rain" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label prefHeight="17.0" prefWidth="118.0" text="Anzahl Messwerte" GridPane.rowIndex="1" />

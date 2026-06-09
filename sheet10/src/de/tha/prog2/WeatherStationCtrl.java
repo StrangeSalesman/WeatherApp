@@ -211,14 +211,6 @@ public class WeatherStationCtrl {
 		myButton.setText("Daten anzeigen");
 	}
 
-	@FXML
-	private void checkMaxTemp() {
-		if (maxTemp.isSelected()) {
-			status.setText("Checkbox is selected");
-		} else {
-			status.setText("Bereit");
-		}
-	}
 
 	@FXML
 	private void loadWeatherStation() {
