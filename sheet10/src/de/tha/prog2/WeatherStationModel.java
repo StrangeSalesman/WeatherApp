@@ -12,7 +12,7 @@ import de.tha.prog2.model.*;
 
 public class WeatherStationModel {
     
-	public List<IWeatherEntry> readWeatherEntries(InputStream in) throws IOException {
+	public static List<IWeatherEntry> readWeatherEntries(InputStream in) throws IOException {
 		InputStream gin = new GZIPInputStream(in);
 		List<IWeatherEntry> list = new ArrayList<>();
 		InputStreamReader isr = new InputStreamReader(gin);
@@ -41,7 +41,7 @@ public class WeatherStationModel {
 	}
 
 	
-	public List<IWeatherStation> readWeatherStations(InputStream in) throws IOException {
+	public static List<IWeatherStation> readWeatherStations(InputStream in) throws IOException {
 			List<IWeatherStation> list = new ArrayList<>();
 			InputStreamReader isr = new InputStreamReader(in);
 			BufferedReader reader = new BufferedReader(isr);

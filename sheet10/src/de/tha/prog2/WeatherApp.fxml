@@ -76,7 +76,7 @@
                               <Label prefHeight="17.0" prefWidth="118.0" text="Maximaltemperatur" GridPane.rowIndex="2" />
                               <Label prefHeight="17.0" prefWidth="118.0" text="Minimaltemperatur" GridPane.rowIndex="3" />
                               <Label prefHeight="17.0" prefWidth="118.0" text="Niederschlag" GridPane.rowIndex="4" />
-                              <CheckBox fx:id="maxTemp" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="maxTemp" mnemonicParsing="false" onAction="#checkMaxTemp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <CheckBox fx:id="minTemp" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <CheckBox fx:id="rain" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label prefHeight="17.0" prefWidth="118.0" text="Anzahl Messwerte" GridPane.rowIndex="1" />
@@ -92,8 +92,8 @@
                      <menus>
                         <Menu mnemonicParsing="false" text="Datei">
                           <items>
-                            <MenuItem fx:id="loadWeatherStation" mnemonicParsing="false" text="Wetterstation laden" />
-                              <MenuItem fx:id="loadWeatherEntry" mnemonicParsing="false" text="Wetterdaten laden" />
+                            <MenuItem fx:id="loadWeatherStation" mnemonicParsing="false" onAction="#loadWeatherStation" text="Wetterstation laden" />
+                              <MenuItem fx:id="loadWeatherEntry" mnemonicParsing="false" onAction="#loadWeatherEntry" text="Wetterdaten laden" />
                           </items>
                         </Menu>
                      </menus>
@@ -101,14 +101,12 @@
                         <Insets top="5.0" />
                      </padding>
                   </MenuBar>
-                  <Text fx:id="status" strokeType="OUTSIDE" strokeWidth="0.0" text="Bereit" GridPane.rowIndex="4">
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
-                  </Text>
                </children>
             </GridPane>
          </children>
            </AnchorPane>
    </center>
+   <bottom>
+      <Text fx:id="status" strokeType="OUTSIDE" strokeWidth="0.0" text="Bereit" BorderPane.alignment="BOTTOM_LEFT" />
+   </bottom>
 </BorderPane>

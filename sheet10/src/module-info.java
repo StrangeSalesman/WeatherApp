@@ -2,6 +2,7 @@ module de.tha.prog2 {
     requires javafx.controls;
     requires javafx.fxml;
 	requires javafx.graphics;
+	requires javafx.base;
 
 
     opens de.tha.prog2 to javafx.fxml;
