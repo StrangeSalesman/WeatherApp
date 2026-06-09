@@ -11,6 +11,26 @@ import java.util.zip.GZIPInputStream;
 import de.tha.prog2.model.*;
 
 public class WeatherStationModel {
+	// --- NEU: Hier speichern wir die Daten nach dem Laden ---
+    private List<IWeatherStation> weatherStations = new ArrayList<>();
+    private List<IWeatherEntry> weatherEntries = new ArrayList<>();
+
+    // Getter und Setter für die Controller-Klasse
+    public List<IWeatherStation> getWeatherStations() {
+        return weatherStations;
+    }
+
+    public void setWeatherStations(List<IWeatherStation> weatherStations) {
+        this.weatherStations = weatherStations;
+    }
+
+    public List<IWeatherEntry> getWeatherEntries() {
+        return weatherEntries;
+    }
+
+    public void setWeatherEntries(List<IWeatherEntry> weatherEntries) {
+        this.weatherEntries = weatherEntries;
+    }
     
 	public static List<IWeatherEntry> readWeatherEntries(InputStream in) throws IOException {
 		InputStream gin = new GZIPInputStream(in);

@@ -11,7 +11,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -19,93 +18,6 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.tha.prog2.WeatherStationCtrl">
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <GridPane layoutX="1.0" layoutY="-3.0" prefHeight="500.0" prefWidth="1024.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="506.6667175292969" minWidth="10.0" prefWidth="277.00001017252606" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="746.3333231608071" minWidth="10.0" prefWidth="746.3333231608071" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="29.333337783813477" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="470.6666622161865" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="166.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="92.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                        <LineChart fx:id="plot" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="747.0" title="Wetterdaten" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <xAxis>
-                                <CategoryAxis side="BOTTOM" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis side="LEFT">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </NumberAxis>
-                            </yAxis>
-                        </LineChart>
-                  <GridPane GridPane.rowIndex="1">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.6666666666667" minWidth="10.0" prefWidth="276.6666666666667" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.66668701171875" minWidth="0.0" prefWidth="0.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <GridPane prefHeight="157.0" prefWidth="81.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.66666666666669" minWidth="10.0" prefWidth="116.00001017252605" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.33333333333331" minWidth="0.0" prefWidth="139.99998982747394" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="48.333343505859375" minHeight="10.0" prefHeight="27.333349863688156" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="91.66665267944336" minHeight="10.0" prefHeight="26.333343505859375" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="53.333343505859375" minHeight="10.0" prefHeight="25.666656494140625" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="36.333343505859375" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="28.33334350585939" minHeight="10.0" prefHeight="27.000000000000014" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label prefHeight="17.0" prefWidth="81.0" text="Wetterstation" />
-                              <Label prefHeight="17.0" prefWidth="118.0" text="Maximaltemperatur" GridPane.rowIndex="2" />
-                              <Label prefHeight="17.0" prefWidth="118.0" text="Minimaltemperatur" GridPane.rowIndex="3" />
-                              <Label prefHeight="17.0" prefWidth="118.0" text="Niederschlag" GridPane.rowIndex="4" />
-                              <CheckBox fx:id="maxTemp" mnemonicParsing="false" onAction="#checkMaxTemp" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <CheckBox fx:id="minTemp" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <CheckBox fx:id="rain" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label prefHeight="17.0" prefWidth="118.0" text="Anzahl Messwerte" GridPane.rowIndex="1" />
-                              <Spinner fx:id="measurements" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <ComboBox fx:id="station" prefWidth="150.0" promptText="Lade die Station..." GridPane.columnIndex="1" />
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </GridPane>
-                     </children>
-                  </GridPane>
-                  <MenuBar prefHeight="25.0" prefWidth="643.0" GridPane.columnSpan="2147483647">
-                     <menus>
-                        <Menu mnemonicParsing="false" text="Datei">
-                          <items>
-                            <MenuItem fx:id="loadWeatherStation" mnemonicParsing="false" onAction="#loadWeatherStation" text="Wetterstation laden" />
-                              <MenuItem fx:id="loadWeatherEntry" mnemonicParsing="false" onAction="#loadWeatherEntry" text="Wetterdaten laden" />
-                          </items>
-                        </Menu>
-                     </menus>
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </MenuBar>
-               </children>
-            </GridPane>
-         </children>
-           </AnchorPane>
-   </center>
    <bottom>
       <Text fx:id="status" strokeType="OUTSIDE" strokeWidth="0.0" text="Bereit" BorderPane.alignment="BOTTOM_LEFT">
          <BorderPane.margin>
@@ -115,4 +27,63 @@
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
+   <top>
+      <MenuBar prefHeight="25.0" prefWidth="643.0" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Datei">
+              <items>
+                <MenuItem fx:id="loadWeatherStation" mnemonicParsing="false" onAction="#loadWeatherStation" text="Wetterstation laden" />
+                  <MenuItem fx:id="loadWeatherEntry" mnemonicParsing="false" onAction="#loadWeatherEntry" text="Wetterdaten laden" />
+              </items>
+            </Menu>
+         </menus>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </MenuBar>
+   </top>
+   <left>
+      <GridPane prefHeight="435.0" prefWidth="297.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.66666666666669" minWidth="10.0" prefWidth="116.00001017252605" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.33333333333331" minWidth="0.0" prefWidth="139.99998982747394" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="48.333343505859375" minHeight="10.0" prefHeight="27.333349863688156" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="91.66665267944336" minHeight="10.0" prefHeight="26.333343505859375" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="53.333343505859375" minHeight="10.0" prefHeight="25.666656494140625" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="36.333343505859375" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="28.33334350585939" minHeight="10.0" prefHeight="27.000000000000014" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="17.0" prefWidth="81.0" text="Wetterstation" />
+            <Label prefHeight="17.0" prefWidth="118.0" text="Maximaltemperatur" GridPane.rowIndex="2" />
+            <Label prefHeight="17.0" prefWidth="118.0" text="Minimaltemperatur" GridPane.rowIndex="3" />
+            <Label prefHeight="17.0" prefWidth="118.0" text="Niederschlag" GridPane.rowIndex="4" />
+            <CheckBox fx:id="maxTemp" mnemonicParsing="false" onAction="#checkMaxTemp" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckBox fx:id="minTemp" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="rain" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label prefHeight="17.0" prefWidth="118.0" text="Anzahl Messwerte" GridPane.rowIndex="1" />
+            <Spinner fx:id="measurementSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="station" prefWidth="150.0" promptText="Lade die Station..." GridPane.columnIndex="1" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+   </left>
+   <center>
+            <LineChart fx:id="plot" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="747.0" title="Wetterdaten" BorderPane.alignment="CENTER">
+                <xAxis>
+                    <CategoryAxis side="BOTTOM" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis side="LEFT">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </NumberAxis>
+                </yAxis>
+            </LineChart>
+   </center>
 </BorderPane>
