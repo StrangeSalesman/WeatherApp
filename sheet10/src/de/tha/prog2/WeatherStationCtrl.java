@@ -35,10 +35,10 @@ public class WeatherStationCtrl {
 	private LineChart<String, Number> plot;
 	
 	@FXML
-	private CheckBox minTemp; // <-- NEU
+	private CheckBox minTemp;
 
 	@FXML
-	private CheckBox rain;    // <-- NEU
+	private CheckBox rain; 
 
 	@FXML
 	private Button myButton;
@@ -76,14 +76,11 @@ public class WeatherStationCtrl {
 		plot.getXAxis().setLabel("Datum");
 		plot.getYAxis().setLabel("Wert");
 		
-		// 1. ValueFactory erstellen (Min, Max, Standardwert)
 	    SpinnerValueFactory<Integer> valueFactory = 
 	            new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5000, 100);
 	    
-	    // 2. Dem Spinner die Factory zuweisen
 	    measurementSpinner.setValueFactory(valueFactory);
 
-	    // 3. Listener für die ComboBox (Station)
 	    station.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 	        @Override
 	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -93,7 +90,6 @@ public class WeatherStationCtrl {
 	        }
 	    });
 
-	    // 4. Listener für den Spinner
 	    measurementSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
 	        @Override
 	        public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
@@ -104,7 +100,6 @@ public class WeatherStationCtrl {
 	        }
 	    });
 	    
-	    // 5. Listener für die Checkboxen
 	    maxTemp.selectedProperty().addListener(new ChangeListener<Boolean>() {
 	        @Override
 	        public void changed(ObservableValue<? extends Boolean> obs, Boolean oldVal, Boolean newVal) {
@@ -149,8 +144,8 @@ public class WeatherStationCtrl {
         if (targetStationID == -1) {
             return;
         }
-
-        // --- 1. Serien vorbereiten ---
+        
+        //Graph
         XYChart.Series<String, Number> seriesMax = new XYChart.Series<>();
         seriesMax.setName("Max. Temp.");
 
@@ -161,8 +156,8 @@ public class WeatherStationCtrl {
         seriesRain.setName("Niederschlag");
 
         int maxDataPoints = measurementSpinner.getValue();
-
-        // --- 2. Daten befüllen ---
+        
+        
         int count = 0;
         for (IWeatherEntry entry : model.getWeatherEntries()) {
             if (entry.getID() == targetStationID) {
@@ -189,8 +184,7 @@ public class WeatherStationCtrl {
             }
         }
 
-        // --- 3. Graphen in das Chart einfügen ---
-        // Auch hier: Nur anzeigen, wenn die Checkbox aktiv ist
+       
         if (maxTemp.isSelected()) {
             plot.getData().add(seriesMax);
         }
@@ -201,7 +195,6 @@ public class WeatherStationCtrl {
             plot.getData().add(seriesRain);
         }
 
-        // 5. Daten einzeichnen
         dataIsVisible = true;
     }
 	
