@@ -1,25 +1,38 @@
 package de.tha.prog2.model;
 
+
 import java.util.Objects;
 
-public class WeatherStation implements IWeatherStation{
-	private int stationID;
+public class WeatherStation implements IWeatherStation {
+	
+	private int id;
 	private String city;
 	private String state;
 	
-	@Override
-	public int getID() {
-		return stationID;
+	public WeatherStation(int id, String city, String state) {
+		this.id = id;
+		this.city = city;
+		this.state = state;
 	}
 
 	@Override
-	public String toString() {
-		return "WeatherStation [stationID=" + stationID + ", city=" + city + ", state=" + state + "]";
+	public int getID() {
+		return this.id;
+	}
+
+	@Override
+	public String getCity() {
+		return this.city;
+	}
+
+	@Override
+	public String getState() {
+		return this.state;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(city, state, stationID);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -31,33 +44,15 @@ public class WeatherStation implements IWeatherStation{
 		if (getClass() != obj.getClass())
 			return false;
 		WeatherStation other = (WeatherStation) obj;
-		return Objects.equals(city, other.city) && Objects.equals(state, other.state) && stationID == other.stationID;
+		return id == other.id;
 	}
 
 	@Override
-	public String getCity() {
-		return city;
+	public String toString() {
+		return "WeatherStation [id=" + id + ", city=" + city + ", state=" + state + "]";
 	}
-
-	public int getStationID() {
-		return stationID;
-	}
-
-	public void setStationID(int stationID) {
-		this.stationID = stationID;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	@Override
-	public String getState() {
-		return state;
-	}
+	
+	
 
 }
+
