@@ -75,12 +75,15 @@ public class WeatherStationCtrl {
 		plot.setAnimated(false);
 		plot.getXAxis().setLabel("Datum");
 		plot.getYAxis().setLabel("Wert");
-		
+
+		// 1. ValueFactory erstellen (Min, Max, Standardwert)
 	    SpinnerValueFactory<Integer> valueFactory = 
 	            new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5000, 100);
-	    
+
+	    // 2. Dem Spinner die Factory zuweisen
 	    measurementSpinner.setValueFactory(valueFactory);
 
+	    // 3. Listener für die ComboBox (Station)
 	    station.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 	        @Override
 	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -90,6 +93,7 @@ public class WeatherStationCtrl {
 	        }
 	    });
 
+	    // 4. Listener für den Spinner
 	    measurementSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
 	        @Override
 	        public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
@@ -99,7 +103,8 @@ public class WeatherStationCtrl {
 	            }
 	        }
 	    });
-	    
+
+	    // 5. Listener für die Checkboxen
 	    maxTemp.selectedProperty().addListener(new ChangeListener<Boolean>() {
 	        @Override
 	        public void changed(ObservableValue<? extends Boolean> obs, Boolean oldVal, Boolean newVal) {
@@ -144,6 +149,8 @@ public class WeatherStationCtrl {
         if (targetStationID == -1) {
             return;
         }
+
+        // --- 1. Serien vorbereiten ---
         
         //Graph
         XYChart.Series<String, Number> seriesMax = new XYChart.Series<>();
@@ -156,27 +163,29 @@ public class WeatherStationCtrl {
         seriesRain.setName("Niederschlag");
 
         int maxDataPoints = measurementSpinner.getValue();
+
+        // --- 2. Daten befüllen ---
         
         
         int count = 0;
         for (IWeatherEntry entry : model.getWeatherEntries()) {
             if (entry.getID() == targetStationID) {
-                
+
                 // Wir fügen die Daten nur zur Serie hinzu, wenn die jeweilige Checkbox angehakt ist
                 if (maxTemp.isSelected()) {
                     seriesMax.getData().add(new XYChart.Data<>(entry.getDate(), entry.getMaxTemp()));
                 }
-                
+
                 if (minTemp.isSelected()) {
                     // HINWEIS: Ersetze getMinTemp() durch die Methode aus deinem IWeatherEntry!
                     seriesMin.getData().add(new XYChart.Data<>(entry.getDate(), entry.getMinTemp())); 
                 }
-                
+
                 if (rain.isSelected()) {
                     // HINWEIS: Ersetze getRain() durch die Methode aus deinem IWeatherEntry!
                     seriesRain.getData().add(new XYChart.Data<>(entry.getDate(), entry.getRain()));
                 }
-                
+
                 count++;
                 if (count >= maxDataPoints) {
                     break; 
@@ -184,6 +193,8 @@ public class WeatherStationCtrl {
             }
         }
 
+        // --- 3. Graphen in das Chart einfügen ---
+        // Auch hier: Nur anzeigen, wenn die Checkbox aktiv ist
        
         if (maxTemp.isSelected()) {
             plot.getData().add(seriesMax);
@@ -195,9 +206,10 @@ public class WeatherStationCtrl {
             plot.getData().add(seriesRain);
         }
 
+        // 5. Daten einzeichnen
         dataIsVisible = true;
     }
-	
+
 
 	private void clearChart() {
 		plot.getData().clear();
@@ -239,7 +251,7 @@ public class WeatherStationCtrl {
 			InputStream in = new FileInputStream(selectedFile);
 			List<IWeatherEntry> list = WeatherStationModel.readWeatherEntries(in);
 			in.close();
-			
+
 			model.setWeatherEntries(list);
 			status.setText(list.size() + " Daten geladen");
 		} catch (FileNotFoundException e) {
@@ -248,5 +260,4 @@ public class WeatherStationCtrl {
 			e.printStackTrace();
 		}
 	}
-
 }
